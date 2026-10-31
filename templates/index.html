@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cadastro e consulta de medicamentos para testes de automação RPA.">
+  <meta name="theme-color" content="#eff6ff">
+  <title>Cadastro de Medicamentos | Drogaria RPA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=6">
+  <script src="../js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <a class="brand" href="index.html" aria-label="Cadastro de Medicamentos">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <g transform="rotate(-45 12 12)">
+              <rect x="7" y="3" width="10" height="18" rx="5"></rect>
+              <path d="M7 12h10"></path>
+            </g>
+          </svg>
+        </span>
+        <span>
+          <strong>Drogaria RPA</strong>
+          <small>Cadastro de medicamentos</small>
+        </span>
+      </a>
+      <div class="header-actions">
+        <div class="header-meta">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Ambiente de testes RPA</span>
+        </div>
+        <button class="logout-button" id="logoutButton" type="button" aria-label="Sair" title="Sair">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 17l5-5-5-5M15 12H3"></path>
+            <path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+
+      <div class="content-grid">
+        <section class="panel form-panel" aria-labelledby="formTitle">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">NOVO REGISTRO</p>
+              <h2 id="formTitle">Dados do medicamento</h2>
+            </div>
+          </div>
+
+          <form id="productForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="productCode">Código interno *</label>
+                <input id="productCode" name="productCode" type="text" placeholder="Ex.: MED-0001" maxlength="30" required>
+              </div>
+              <div class="field">
+                <label for="productName">Nome do medicamento *</label>
+                <input id="productName" name="productName" type="text" placeholder="Ex.: Paracetamol" maxlength="100" required>
+              </div>
+              <div class="field">
+                <label for="activeIngredient">Princípio ativo *</label>
+                <input id="activeIngredient" name="activeIngredient" type="text" placeholder="Ex.: Paracetamol" maxlength="100" required>
+              </div>
+              <div class="field">
+                <label for="category">Categoria *</label>
+                <select id="category" name="category" required>
+                  <option value="" selected disabled>Selecione</option>
+                  <option value="Referência">Referência</option>
+                  <option value="Genérico">Genérico</option>
+                  <option value="Similar">Similar</option>
+                  <option value="MIP">MIP (isento de prescrição)</option>
+                  <option value="Controlado">Controlado</option>
+                  <option value="Outro">Outro</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="dosageForm">Forma farmacêutica *</label>
+                <select id="dosageForm" name="dosageForm" required>
+                  <option value="" selected disabled>Selecione</option>
+                  <option value="Comprimido">Comprimido</option>
+                  <option value="Cápsula">Cápsula</option>
+                  <option value="Solução oral">Solução oral</option>
+                  <option value="Suspensão oral">Suspensão oral</option>
+                  <option value="Xarope">Xarope</option>
+                  <option value="Creme">Creme</option>
+                  <option value="Pomada">Pomada</option>
+                  <option value="Gotas">Gotas</option>
+                  <option value="Injetável">Injetável</option>
+                  <option value="Outro">Outro</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="strength">Concentração</label>
+                <input id="strength" name="strength" type="text" placeholder="Ex.: 500 mg" maxlength="40">
+              </div>
+              <div class="field">
+                <label for="manufacturer">Laboratório / fabricante</label>
+                <input id="manufacturer" name="manufacturer" type="text" placeholder="Nome do fabricante" maxlength="100">
+              </div>
+              <div class="field">
+                <label for="barcode">Código de barras (EAN)</label>
+                <input id="barcode" name="barcode" type="text" inputmode="numeric" placeholder="Somente números" maxlength="14">
+              </div>
+              <div class="field">
+                <label for="batch">Lote</label>
+                <input id="batch" name="batch" type="text" placeholder="Número do lote" maxlength="40">
+              </div>
+              <div class="field">
+                <label for="expirationDate">Validade *</label>
+                <input id="expirationDate" name="expirationDate" type="date" required>
+              </div>
+              <div class="field">
+                <label for="stock">Estoque (unidades) *</label>
+                <input id="stock" name="stock" type="number" min="0" step="1" placeholder="0" required>
+              </div>
+              <div class="field">
+                <label for="price">Preço de venda (R$) *</label>
+                <input id="price" name="price" type="number" min="0" step="0.01" placeholder="0,00" required>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="button button-primary" type="submit">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 5v14M5 12h14"></path>
+                </svg>
+                Cadastrar medicamento
+              </button>
+              <button class="button button-secondary" id="clearFormButton" type="reset">Limpar campos</button>
+            </div>
+          </form>
+          <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="panel inventory-panel" aria-labelledby="inventoryTitle">
+          <div class="panel-heading inventory-heading">
+            <div>
+              <p class="section-kicker">INVENTÁRIO</p>
+              <h2 id="inventoryTitle">Produtos cadastrados</h2>
+            </div>
+            <div class="inventory-tools">
+              <label class="search-box" for="productSearch">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7"></circle>
+                  <path d="m20 20-4-4"></path>
+                </svg>
+                <input id="productSearch" type="search" placeholder="Buscar medicamento..." autocomplete="off">
+              </label>
+              <div class="total-card" aria-live="polite">
+                <span>Produtos cadastrados</span>
+                <strong id="productCount">0</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="product-table">
+              <thead>
+                <tr>
+                  <th scope="col">Código</th>
+                  <th scope="col">Medicamento</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Apresentação</th>
+                  <th scope="col">Lote / validade</th>
+                  <th scope="col">Estoque</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col"><span class="sr-only">Ações</span></th>
+                </tr>
+              </thead>
+              <tbody id="productTableBody"></tbody>
+            </table>
+            <div id="emptyState" class="empty-state">
+              <span class="empty-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M10.5 3.5a5 5 0 0 1 7.07 7.07l-7 7.01a5 5 0 0 1-7.08-7.08l7.01-7Z"></path>
+                  <path d="m7 14 7-7"></path>
+                </svg>
+              </span>
+              <h3 id="emptyTitle">Nenhum medicamento cadastrado</h3>
+              <p id="emptyDescription">Os produtos cadastrados aparecerão aqui.</p>
+            </div>
+          </div>
+          <div class="inventory-footer">
+            <span id="resultCount">0 produtos</span>
+            <button class="text-button" id="clearInventoryButton" type="button">Limpar inventário</button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="page-footer">Cadastro de medicamentos para testes de automação RPA.</footer>
+  </div>
+</body>
+</html>
