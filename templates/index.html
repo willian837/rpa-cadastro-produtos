@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=6">
+  <link rel="stylesheet" href="../css/style.css?v=9">
   <script src="../js/app.js" defer></script>
 </head>
 <body>
@@ -122,7 +122,7 @@
               </div>
               <div class="field">
                 <label for="price">Preço de venda (R$) *</label>
-                <input id="price" name="price" type="number" min="0" step="0.01" placeholder="0,00" required>
+                <input id="price" name="price" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0,00" required>
               </div>
             </div>
 
@@ -131,7 +131,7 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 5v14M5 12h14"></path>
                 </svg>
-                Cadastrar medicamento
+                Cadastrar
               </button>
               <button class="button button-secondary" id="clearFormButton" type="reset">Limpar campos</button>
             </div>
@@ -141,23 +141,13 @@
 
         <section class="panel inventory-panel" aria-labelledby="inventoryTitle">
           <div class="panel-heading inventory-heading">
-            <div>
+            <div class="inventory-title">
               <p class="section-kicker">INVENTÁRIO</p>
               <h2 id="inventoryTitle">Produtos cadastrados</h2>
             </div>
-            <div class="inventory-tools">
-              <label class="search-box" for="productSearch">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="11" cy="11" r="7"></circle>
-                  <path d="m20 20-4-4"></path>
-                </svg>
-                <input id="productSearch" type="search" placeholder="Buscar medicamento..." autocomplete="off">
-              </label>
-              <div class="total-card" aria-live="polite">
-                <span>Produtos cadastrados</span>
-                <strong id="productCount">0</strong>
-              </div>
-            </div>
+            <span class="inventory-count" aria-live="polite" aria-label="Produtos cadastrados">
+              <strong id="productCount">0</strong>
+            </span>
           </div>
 
           <div class="table-container">
@@ -170,7 +160,7 @@
                   <th scope="col">Apresentação</th>
                   <th scope="col">Lote / validade</th>
                   <th scope="col">Estoque</th>
-                  <th scope="col">Preço</th>
+                  <th class="price-column" scope="col">Preço</th>
                   <th scope="col"><span class="sr-only">Ações</span></th>
                 </tr>
               </thead>

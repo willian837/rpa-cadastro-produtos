@@ -5,7 +5,7 @@ Aplicação web estática para testes de cadastro e consulta de medicamentos. N�
 ## Funcionalidades
 
 - Cadastro de medicamentos com código interno, nome, princípio ativo, categoria, forma farmacêutica, concentração, fabricante, código de barras, lote, validade, estoque e preço.
-- Busca no inventário, indicação de estoque baixo e acompanhamento de validade.
+- Listagem do inventário, indicação de estoque baixo e acompanhamento de validade.
 - Exclusão de um produto ou limpeza do inventário.
 - Armazenamento no `localStorage` do navegador.
 - API JavaScript `window.RPAProdutos` para integração com automações na página.

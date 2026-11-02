@@ -12,11 +12,8 @@
   const tableBody = document.getElementById('productTableBody');
   const count = document.getElementById('productCount');
   const resultCount = document.getElementById('resultCount');
-  const search = document.getElementById('productSearch');
   const feedback = document.getElementById('feedback');
   const emptyState = document.getElementById('emptyState');
-  const emptyTitle = document.getElementById('emptyTitle');
-  const emptyDescription = document.getElementById('emptyDescription');
   const clearInventoryButton = document.getElementById('clearInventoryButton');
   const logoutButton = document.getElementById('logoutButton');
   const expirationInput = document.getElementById('expirationDate');
@@ -118,7 +115,7 @@
         <span class="expiry-tag${expirationClass}">${escapeHtml(formatDate(product.expirationDate))}${expirationLabel ? ` · ${expirationLabel}` : ''}</span>
       </td>
       <td><span class="stock-tag ${stockClass}">${escapeHtml(product.stock)}</span></td>
-      <td>${formatCurrency(product.price)}</td>
+      <td class="price-column">${formatCurrency(product.price)}</td>
       <td>
         <button class="delete-button" type="button" data-delete-id="${escapeHtml(product.id)}" aria-label="Excluir ${escapeHtml(product.productName)}" title="Excluir medicamento">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -131,34 +128,10 @@
   }
 
   function renderProducts() {
-    const query = search.value.trim().toLocaleLowerCase('pt-BR');
-    const filtered = products.filter(product => {
-      const searchable = [
-        product.productCode,
-        product.productName,
-        product.activeIngredient,
-        product.category,
-        product.dosageForm,
-        product.strength,
-        product.manufacturer,
-        product.barcode,
-        product.batch
-      ].join(' ').toLocaleLowerCase('pt-BR');
-      return searchable.includes(query);
-    });
-
-    tableBody.replaceChildren(...filtered.map(createProductRow));
+    tableBody.replaceChildren(...products.map(createProductRow));
     count.textContent = products.length;
-    resultCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'produto' : 'produtos'}`;
-    emptyState.hidden = filtered.length !== 0;
-
-    if (products.length === 0) {
-      emptyTitle.textContent = 'Nenhum medicamento cadastrado';
-      emptyDescription.textContent = 'Os produtos cadastrados aparecerão aqui.';
-    } else {
-      emptyTitle.textContent = 'Nenhum resultado encontrado';
-      emptyDescription.textContent = 'Tente buscar pelo nome, código ou princípio ativo.';
-    }
+    resultCount.textContent = `${products.length} ${products.length === 1 ? 'produto' : 'produtos'}`;
+    emptyState.hidden = products.length !== 0;
   }
 
   function showFeedback(message, type) {
@@ -248,7 +221,6 @@
   function init() {
     expirationInput.min = getLocalDateValue(new Date());
     form.addEventListener('submit', handleSubmit);
-    search.addEventListener('input', renderProducts);
     clearInventoryButton.addEventListener('click', clearInventory);
     logoutButton.addEventListener('click', () => {
       localStorage.removeItem(LOGIN_KEY);
