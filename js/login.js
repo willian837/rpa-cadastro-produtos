@@ -2,7 +2,7 @@
   'use strict';
 
   const LOGIN_KEY = 'cadastro_produtos_logado';
-  const LOGIN_USER = 'demo';
+  const LOGIN_USER = 'admin';
   const LOGIN_PASS = 'RpaTeste!Produtos-9mK4';
 
   const loginForm = document.getElementById('loginForm');
